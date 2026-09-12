@@ -1,0 +1,29 @@
+.mobile-app {
+  --ink: #241f1b;
+  --red: #a21d18;
+  --paper: #f3efe4;
+  --paper-deep: #e8e2d4;
+  --line: #d4cbbd;
+  --muted: #8a7b6e;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --top-h: 56px;
+  --tab-h: 58px;
+  color: var(--ink);
+  font-family:
+    'PingFang SC',
+    'Hiragino Sans GB',
+    'Microsoft YaHei',
+    -apple-system,
+    sans-serif;
+}
+
+.mobile-app button,
+.mobile-app input,
+.mobile-app textarea {
+  font: inherit;
+}
+
+.mobile-app a {
+  color: inherit;
+}

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="向上拳头">
+  <rect width="128" height="128" rx="28" fill="#18a058"/>
+  <g fill="#f3d2b5" stroke="#0d5c35" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M50 118c-7-2-11-12-8-28 3-16 8-38 10-48 1-6 6-10 12-10h14c6 0 11 5 12 11 2 10 6 31 8 46 2 16-2 27-10 29z"/>
+    <path d="M42 62c-8 3-14 12-12 20 2 9 10 14 19 12"/>
+    <rect x="46" y="28" width="14" height="28" rx="7"/>
+    <rect x="59" y="22" width="14" height="32" rx="7"/>
+    <rect x="72" y="26" width="14" height="30" rx="7"/>
+    <rect x="84" y="32" width="13" height="26" rx="6.5"/>
+  </g>
+  <path d="M54 46c2 8 8 12 16 11M68 40c1 7 6 11 12 10" fill="none" stroke="#e0b48c" stroke-width="2.2" stroke-linecap="round"/>
+</svg>

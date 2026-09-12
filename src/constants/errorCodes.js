@@ -1,0 +1,115 @@
+export const ErrorCodes = Object.freeze({
+  SUCCESS: 'SUCCESS',
+  PARAM_INVALID: 'PARAM_INVALID',
+  SYSTEM_ERROR: 'SYSTEM_ERROR',
+  USER_NOT_EXIST: 'USER:00001',
+  USER_ACCOUNT_EXIST: 'USER:00002',
+  USER_UNAUTHENTICATED: 'USER:00003',
+  USER_INVALID_CREDENTIAL: 'USER:00004',
+  USER_TOKEN_EXPIRED: 'USER:00005',
+  FILE_NOT_EXIST: 'FILE:00001',
+  FILE_TOO_LARGE: 'FILE:00002',
+  FILE_NAME_INVALID: 'FILE:00003',
+  FILE_PREVIEW_UNSUPPORTED: 'FILE:00004',
+  ARTICLE_NOT_EXIST: 'ARTICLE:00001',
+  ARTICLE_COVER_NOT_EXIST: 'ARTICLE:00002',
+  ARTICLE_COVER_INVALID: 'ARTICLE:00003',
+  ARTICLE_FORBIDDEN: 'ARTICLE:00004',
+  ARTICLE_COVER_FORBIDDEN: 'ARTICLE:00005',
+  ARTICLE_STATUS_INVALID: 'ARTICLE:00006',
+  ATTACHMENT_FILE_NOT_EXIST: 'ARTICLE:00007',
+  ATTACHMENT_INVALID: 'ARTICLE:00008',
+  ATTACHMENT_FORBIDDEN: 'ARTICLE:00009',
+  TOPIC_NOT_EXIST: 'TOPIC:00001',
+  TOPIC_FORBIDDEN: 'TOPIC:00002',
+  TOPIC_IMAGE_NOT_EXIST: 'TOPIC:00003',
+  TOPIC_IMAGE_INVALID: 'TOPIC:00004',
+  TOPIC_IMAGE_FORBIDDEN: 'TOPIC:00005',
+  TOPIC_ATTACHMENT_NOT_EXIST: 'TOPIC:00006',
+  TOPIC_ATTACHMENT_FORBIDDEN: 'TOPIC:00007',
+  TOPIC_FILE_IDS_INVALID: 'TOPIC:00008',
+  TOPIC_CONTENT_INVALID: 'TOPIC:00009',
+  TOPIC_TAGS_INVALID: 'TOPIC:00010',
+  COMMENT_NOT_EXIST: 'COMMENT:00001',
+  COMMENT_FORBIDDEN: 'COMMENT:00002',
+  COMMENT_PARENT_INVALID: 'COMMENT:00003',
+  COMMENT_INVALID: 'COMMENT:00004',
+  COMMENT_TARGET_INVALID: 'COMMENT:00005',
+  LIKE_TARGET_INVALID: 'LIKE:00001',
+  BROWSE_TARGET_INVALID: 'BROWSE:00001',
+  FEEDBACK_NOT_EXIST: 'FEEDBACK:00001',
+  FEEDBACK_FORBIDDEN: 'FEEDBACK:00002',
+  FEEDBACK_CONTENT_INVALID: 'FEEDBACK:00003',
+  FEEDBACK_IMAGE_NOT_EXIST: 'FEEDBACK:00004',
+  FEEDBACK_IMAGE_INVALID: 'FEEDBACK:00005',
+  FEEDBACK_IMAGE_FORBIDDEN: 'FEEDBACK:00006',
+  FEEDBACK_IMAGES_INVALID: 'FEEDBACK:00007',
+  FEEDBACK_REPLY_INVALID: 'FEEDBACK:00008',
+  FEEDBACK_NOT_WEBMASTER: 'FEEDBACK:00009',
+})
+
+const errorMessages = {
+  [ErrorCodes.PARAM_INVALID]: '请检查填写内容',
+  [ErrorCodes.SYSTEM_ERROR]: '服务暂时不可用，请稍后重试',
+  [ErrorCodes.USER_NOT_EXIST]: '用户不存在',
+  [ErrorCodes.USER_ACCOUNT_EXIST]: '该账号已被使用',
+  [ErrorCodes.USER_UNAUTHENTICATED]: '请先登录',
+  [ErrorCodes.USER_INVALID_CREDENTIAL]: '账号或密码错误',
+  [ErrorCodes.USER_TOKEN_EXPIRED]: '登录已过期，请重新登录',
+  [ErrorCodes.FILE_NOT_EXIST]: '文件不存在',
+  [ErrorCodes.FILE_TOO_LARGE]: '文件大小不能超过 100M',
+  [ErrorCodes.FILE_NAME_INVALID]: '文件名或扩展名不合法',
+  [ErrorCodes.FILE_PREVIEW_UNSUPPORTED]: '该文件类型不支持在线预览',
+  [ErrorCodes.ARTICLE_NOT_EXIST]: '投稿不存在',
+  [ErrorCodes.ARTICLE_COVER_NOT_EXIST]: '封面文件不存在',
+  [ErrorCodes.ARTICLE_COVER_INVALID]: '封面仅支持 JPG、PNG、GIF 或 WebP',
+  [ErrorCodes.ARTICLE_FORBIDDEN]: '无权操作该投稿',
+  [ErrorCodes.ARTICLE_COVER_FORBIDDEN]: '只能使用自己上传的封面',
+  [ErrorCodes.ARTICLE_STATUS_INVALID]: '投稿内容不完整或状态不合法',
+  [ErrorCodes.ATTACHMENT_FILE_NOT_EXIST]: '附件文件不存在',
+  [ErrorCodes.ATTACHMENT_INVALID]: '附件名称或类型不合法',
+  [ErrorCodes.ATTACHMENT_FORBIDDEN]: '只能使用自己上传的附件',
+  [ErrorCodes.TOPIC_NOT_EXIST]: '话题不存在',
+  [ErrorCodes.TOPIC_FORBIDDEN]: '无权操作该话题',
+  [ErrorCodes.TOPIC_IMAGE_NOT_EXIST]: '话题图片不存在',
+  [ErrorCodes.TOPIC_IMAGE_INVALID]: '图片仅支持 JPG、PNG、GIF 或 WebP',
+  [ErrorCodes.TOPIC_IMAGE_FORBIDDEN]: '只能使用自己上传的图片',
+  [ErrorCodes.TOPIC_ATTACHMENT_NOT_EXIST]: '话题附件不存在',
+  [ErrorCodes.TOPIC_ATTACHMENT_FORBIDDEN]: '只能使用自己上传的附件',
+  [ErrorCodes.TOPIC_FILE_IDS_INVALID]: '图片或附件数量不合法',
+  [ErrorCodes.TOPIC_CONTENT_INVALID]: '话题正文不能为空，且不超过 5000 字',
+  [ErrorCodes.TOPIC_TAGS_INVALID]: '标签需 1-5 个，单个不超过 20 字且不含空格',
+  [ErrorCodes.COMMENT_NOT_EXIST]: '评论不存在',
+  [ErrorCodes.COMMENT_FORBIDDEN]: '无权操作该评论',
+  [ErrorCodes.COMMENT_PARENT_INVALID]: '父评论不存在或不属于该对象',
+  [ErrorCodes.COMMENT_INVALID]: '评论内容不合法',
+  [ErrorCodes.COMMENT_TARGET_INVALID]: '评论对象不合法',
+  [ErrorCodes.LIKE_TARGET_INVALID]: '点赞对象不合法',
+  [ErrorCodes.BROWSE_TARGET_INVALID]: '浏览对象不合法',
+  [ErrorCodes.FEEDBACK_NOT_EXIST]: '建议不存在',
+  [ErrorCodes.FEEDBACK_FORBIDDEN]: '无权查看该建议',
+  [ErrorCodes.FEEDBACK_CONTENT_INVALID]: '建议内容不能为空且不超过 2000 字',
+  [ErrorCodes.FEEDBACK_IMAGE_NOT_EXIST]: '建议图片不存在',
+  [ErrorCodes.FEEDBACK_IMAGE_INVALID]: '图片仅支持 JPG、PNG、GIF 或 WebP',
+  [ErrorCodes.FEEDBACK_IMAGE_FORBIDDEN]: '只能使用自己上传的图片',
+  [ErrorCodes.FEEDBACK_IMAGES_INVALID]: '最多上传 9 张图片',
+  [ErrorCodes.FEEDBACK_REPLY_INVALID]: '站长评论不能为空且不超过 2000 字',
+  [ErrorCodes.FEEDBACK_NOT_WEBMASTER]: '仅站长可回复建议',
+}
+
+export function getErrorMessage(error) {
+  if (error?.code && errorMessages[error.code]) {
+    return errorMessages[error.code]
+  }
+  if (error?.message && error.message !== 'Network Error') {
+    return error.message
+  }
+  return '网络连接失败，请稍后重试'
+}
+
+export function isAuthenticationError(error) {
+  return (
+    error?.code === ErrorCodes.USER_UNAUTHENTICATED ||
+    error?.code === ErrorCodes.USER_TOKEN_EXPIRED
+  )
+}
