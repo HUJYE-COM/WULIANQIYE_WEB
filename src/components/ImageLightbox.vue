@@ -1,5 +1,7 @@
 <script setup>
-import { onBeforeUnmount, watch } from 'vue'
+import { computed, onBeforeUnmount, watch } from 'vue'
+
+import { resolveApiUrl } from '@/api/file'
 
 const props = defineProps({
   src: {
@@ -13,6 +15,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['close'])
+const displaySrc = computed(() => resolveApiUrl(props.src))
 
 function close() {
   emit('close')
@@ -53,7 +56,7 @@ onBeforeUnmount(() => {
       aria-label="图片预览"
       @click="close"
     >
-      <img :src="src" :alt="alt" @click.stop />
+      <img :src="displaySrc" :alt="alt" @click.stop />
       <button type="button" aria-label="关闭" @click="close">×</button>
     </div>
   </Teleport>

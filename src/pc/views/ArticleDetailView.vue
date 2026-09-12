@@ -9,7 +9,7 @@ import InteractionPanel from '@/pc/components/interaction/InteractionPanel.vue'
 import StatIcon from '@/pc/components/interaction/StatIcon.vue'
 import { getArticle } from '@/api/article'
 import { recordBrowse } from '@/api/browse'
-import { getFileDownloadUrl } from '@/api/file'
+import { getFileDownloadUrl, resolveApiUrl, resolveContentUrls } from '@/api/file'
 import { getErrorMessage } from '@/constants/errorCodes'
 import { usePublicUserStore } from '@/stores/publicUser'
 
@@ -28,6 +28,7 @@ const tags = computed(() =>
     .map((tag) => tag.trim())
     .filter(Boolean),
 )
+const previewContent = computed(() => resolveContentUrls(article.value?.content || ''))
 
 const attachmentTypeNames = {
   image: '图片',
@@ -104,7 +105,7 @@ function formatDate(value) {
     <template v-else-if="article">
       <header class="article-header">
         <div class="cover">
-          <img :src="article.cover_url" :alt="article.title" />
+          <img :src="resolveApiUrl(article.cover_url)" :alt="article.title" />
           <span>CASE #{{ article.id }}</span>
         </div>
 
@@ -149,7 +150,7 @@ function formatDate(value) {
           <strong>公开记录正文</strong>
         </div>
         <MdPreview
-          :model-value="article.content"
+          :model-value="previewContent"
           :sanitize="sanitizeHtml"
           language="zh-CN"
           no-mermaid

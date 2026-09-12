@@ -4,6 +4,7 @@ import { useMessage } from 'naive-ui'
 
 import ImageGridUpload from '@/mobile/components/upload/ImageGridUpload.vue'
 import ImageLightbox from '@/components/ImageLightbox.vue'
+import { resolveApiUrl } from '@/api/file'
 import { formatDate } from '@/mobile/utils/format'
 import { createFeedback, getFeedbacks, replyFeedback } from '@/api/feedback'
 import { getErrorMessage } from '@/constants/errorCodes'
@@ -103,9 +104,9 @@ async function sendReply(item) {
           v-for="image in item.images"
           :key="image.file_id"
           type="button"
-          @click="previewSrc = image.url"
+          @click="previewSrc = resolveApiUrl(image.url)"
         >
-          <img :src="image.url" alt="" />
+          <img :src="resolveApiUrl(image.url)" alt="" />
         </button>
       </div>
       <div v-for="reply in item.replies" :key="reply.id" class="reply">

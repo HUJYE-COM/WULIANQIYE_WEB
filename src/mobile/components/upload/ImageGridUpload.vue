@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import { useMessage } from 'naive-ui'
 
-import { getFilePreviewUrl, uploadFile } from '@/api/file'
+import { getFilePreviewUrl, resolveApiUrl, uploadFile } from '@/api/file'
 import { getErrorMessage } from '@/constants/errorCodes'
 import ImageLightbox from '@/components/ImageLightbox.vue'
 
@@ -23,7 +23,7 @@ const remaining = computed(() => props.max - props.modelValue.length)
 const previewSrc = ref('')
 
 function previewOf(image) {
-  return image[props.urlKey] || image.preview_url || image.url
+  return resolveApiUrl(image[props.urlKey] || image.preview_url || image.url)
 }
 
 async function selectFiles(event) {

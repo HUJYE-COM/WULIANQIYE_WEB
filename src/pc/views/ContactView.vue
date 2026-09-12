@@ -2,6 +2,7 @@
 import { computed, onMounted, reactive, ref } from 'vue'
 import { useMessage } from 'naive-ui'
 
+import { resolveApiUrl } from '@/api/file'
 import { createFeedback, getFeedbacks, replyFeedback } from '@/api/feedback'
 import { getErrorMessage } from '@/constants/errorCodes'
 import ImageLightbox from '@/components/ImageLightbox.vue'
@@ -106,7 +107,7 @@ function formatDate(value) {
 }
 
 function openPreview(url) {
-  if (url) previewSrc.value = url
+  if (url) previewSrc.value = resolveApiUrl(url)
 }
 </script>
 
@@ -174,7 +175,7 @@ function openPreview(url) {
               type="button"
               @click="openPreview(image.url)"
             >
-              <img :src="image.url" alt="建议配图" />
+              <img :src="resolveApiUrl(image.url)" alt="建议配图" />
             </button>
           </div>
 

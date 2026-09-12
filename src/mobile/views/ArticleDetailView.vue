@@ -11,7 +11,7 @@ import StatIcon from '@/mobile/components/icons/StatIcon.vue'
 import { articleTags, displayName, formatDate, initial } from '@/mobile/utils/format'
 import { getArticle } from '@/api/article'
 import { recordBrowse } from '@/api/browse'
-import { getFileDownloadUrl, getFilePreviewUrl } from '@/api/file'
+import { getFileDownloadUrl, getFilePreviewUrl, resolveApiUrl, resolveContentUrls } from '@/api/file'
 import { getErrorMessage } from '@/constants/errorCodes'
 import { usePublicUserStore } from '@/stores/publicUser'
 
@@ -25,6 +25,7 @@ const author = computed(() =>
   article.value ? publicUserStore.getCachedUser(article.value.created_by) : null,
 )
 const tags = computed(() => articleTags(article.value?.company_tags))
+const previewContent = computed(() => resolveContentUrls(article.value?.content || ''))
 const typeNames = { image: '图片', video: '视频', audio: '录音', other: '材料' }
 
 onMounted(loadArticle)
@@ -69,7 +70,7 @@ function sanitizeHtml(html) {
 }
 
 function openPreview(src) {
-  if (src) previewSrc.value = src
+  if (src) previewSrc.value = resolveApiUrl(src)
 }
 
 function onBodyClick(event) {
@@ -91,7 +92,7 @@ function onAttachmentClick(event, item) {
     <template v-else-if="article">
       <div class="cover">
         <button type="button" @click="openPreview(article.cover_url)">
-          <img :src="article.cover_url" :alt="article.title" />
+          <img :src="resolveApiUrl(article.cover_url)" :alt="article.title" />
         </button>
         <span>CASE #{{ article.id }}</span>
       </div>
@@ -116,7 +117,7 @@ function onAttachmentClick(event, item) {
       </div>
       <section class="body" @click="onBodyClick">
         <strong>公开记录</strong>
-        <MdPreview :model-value="article.content" :sanitize="sanitizeHtml" language="zh-CN" no-mermaid />
+        <MdPreview :model-value="previewContent" :sanitize="sanitizeHtml" language="zh-CN" no-mermaid />
       </section>
       <section v-if="article.attachments?.length" class="files">
         <strong>证据材料 {{ article.attachments.length }}</strong>

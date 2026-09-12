@@ -4,6 +4,7 @@ import { useMessage } from 'naive-ui'
 
 import StatIcon from '@/pc/components/interaction/StatIcon.vue'
 import { getHotArticles, getPublishedArticles } from '@/api/article'
+import { resolveApiUrl } from '@/api/file'
 import { getErrorMessage } from '@/constants/errorCodes'
 import { usePublicUserStore } from '@/stores/publicUser'
 
@@ -213,7 +214,7 @@ function backToHero() {
             :to="{ name: 'article-detail', params: { id: article.id } }"
           >
             <div class="article-cover">
-              <img :src="article.cover_url" :alt="article.title" loading="lazy" />
+              <img :src="resolveApiUrl(article.cover_url)" :alt="article.title" loading="lazy" />
             </div>
             <div class="article-body">
               <div class="article-heading">

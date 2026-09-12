@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { useMessage } from 'naive-ui'
 
-import { getFilePreviewUrl, uploadFile } from '@/api/file'
+import { getFilePreviewUrl, resolveApiUrl, uploadFile } from '@/api/file'
 import { getErrorMessage } from '@/constants/errorCodes'
 import ImageLightbox from '@/components/ImageLightbox.vue'
 
@@ -81,7 +81,7 @@ function remove(index) {
 const previewSrc = ref('')
 
 function openPreview(image) {
-  previewSrc.value = image.url
+  previewSrc.value = resolveApiUrl(image.url)
 }
 
 </script>
@@ -91,7 +91,7 @@ function openPreview(image) {
     <div class="image-grid">
       <div v-for="(image, index) in modelValue" :key="image.file_id" class="image-tile">
         <button class="preview-hit" type="button" @click="openPreview(image)">
-          <img :src="image.url" :alt="image.name || '建议配图'" />
+          <img :src="resolveApiUrl(image.url)" :alt="image.name || '建议配图'" />
         </button>
         <button class="remove-hit" type="button" aria-label="移除图片" @click="remove(index)">
           ×

@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { useMessage } from 'naive-ui'
 
-import { getFilePreviewUrl, uploadFile } from '@/api/file'
+import { getFilePreviewUrl, resolveApiUrl, uploadFile } from '@/api/file'
 import { getErrorMessage } from '@/constants/errorCodes'
 
 defineProps({
@@ -62,7 +62,7 @@ async function selectFile(event) {
       type="file"
       @change="selectFile"
     />
-    <img v-if="previewUrl" :src="previewUrl" alt="投稿封面预览" />
+    <img v-if="previewUrl" :src="resolveApiUrl(previewUrl)" alt="投稿封面预览" />
     <span v-else class="cover-placeholder">
       <b>＋</b>
       <strong>上传曝光封面</strong>

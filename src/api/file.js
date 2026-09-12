@@ -12,6 +12,14 @@ export function resolveApiUrl(path) {
   return `${apiBaseUrl}${rel}`
 }
 
+export function resolveContentUrls(content) {
+  if (!content) return ''
+  return content.replace(/(!\[[^\]]*]\()([^)\s]+)(\))/g, (match, open, url, close) => {
+    if (!/\/(?:api\/)?file\/\d+/i.test(url) && !url.startsWith('/api/')) return match
+    return `${open}${resolveApiUrl(url)}${close}`
+  })
+}
+
 export function uploadFile(file, onUploadProgress) {
   const form = new FormData()
   form.append('file', file)

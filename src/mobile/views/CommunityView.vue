@@ -7,6 +7,7 @@ import TopicComposer from '@/mobile/components/community/TopicComposer.vue'
 import ImageLightbox from '@/components/ImageLightbox.vue'
 import LikeButton from '@/mobile/components/interaction/LikeButton.vue'
 import StatIcon from '@/mobile/components/icons/StatIcon.vue'
+import { resolveApiUrl } from '@/api/file'
 import { formatTimeAgo, initial } from '@/mobile/utils/format'
 import { createTopic, getHotTopicTags, getTopicList } from '@/api/topic'
 import { getErrorMessage } from '@/constants/errorCodes'
@@ -218,9 +219,9 @@ function excerpt(content) {
           v-for="image in topic.images.slice(0, 3)"
           :key="image.file_id"
           type="button"
-          @click="previewSrc = image.url"
+          @click="previewSrc = resolveApiUrl(image.url)"
         >
-          <img :src="image.url" alt="" />
+          <img :src="resolveApiUrl(image.url)" alt="" />
         </button>
       </div>
       <div class="tags">

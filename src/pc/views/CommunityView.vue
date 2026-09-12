@@ -6,6 +6,7 @@ import { useRoute, useRouter } from 'vue-router'
 import TopicComposer from '@/pc/components/community/TopicComposer.vue'
 import LikeButton from '@/pc/components/interaction/LikeButton.vue'
 import StatIcon from '@/pc/components/interaction/StatIcon.vue'
+import { resolveApiUrl } from '@/api/file'
 import { createTopic, getHotTopicTags, getTopicList } from '@/api/topic'
 import { getErrorMessage } from '@/constants/errorCodes'
 import { usePublicUserStore } from '@/stores/publicUser'
@@ -298,7 +299,7 @@ function formatTime(value) {
                 :key="image.file_id"
                 :to="{ name: 'topic-detail', params: { id: topic.id } }"
               >
-                <img :src="image.url" alt="话题配图" loading="lazy" />
+                <img :src="resolveApiUrl(image.url)" alt="话题配图" loading="lazy" />
                 <b v-if="topic.images.length > 3 && image === topic.images[2]">
                   +{{ topic.images.length - 3 }}
                 </b>

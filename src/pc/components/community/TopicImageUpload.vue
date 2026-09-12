@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import { useMessage } from 'naive-ui'
 
-import { getFilePreviewUrl, uploadFile } from '@/api/file'
+import { getFilePreviewUrl, resolveApiUrl, uploadFile } from '@/api/file'
 import { getErrorMessage } from '@/constants/errorCodes'
 import ImageLightbox from '@/components/ImageLightbox.vue'
 
@@ -73,8 +73,8 @@ function remove(fileId) {
 <template>
   <div class="image-upload">
     <div v-for="image in modelValue" :key="image.file_id" class="image-cell">
-      <button class="preview-hit" type="button" @click="previewSrc = image.preview_url">
-        <img :src="image.preview_url" alt="话题配图" />
+      <button class="preview-hit" type="button" @click="previewSrc = resolveApiUrl(image.preview_url)">
+        <img :src="resolveApiUrl(image.preview_url)" alt="话题配图" />
       </button>
       <button class="remove-hit" type="button" aria-label="移除图片" @click="remove(image.file_id)">
         ×

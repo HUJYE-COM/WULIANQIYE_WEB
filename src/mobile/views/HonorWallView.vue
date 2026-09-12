@@ -5,6 +5,7 @@ import { useMessage } from 'naive-ui'
 import StatIcon from '@/mobile/components/icons/StatIcon.vue'
 import { articleTags, formatDate, initial } from '@/mobile/utils/format'
 import { getHotArticles, getPublishedArticles } from '@/api/article'
+import { resolveApiUrl } from '@/api/file'
 import { getErrorMessage } from '@/constants/errorCodes'
 import { usePublicUserStore } from '@/stores/publicUser'
 
@@ -152,7 +153,7 @@ function authorName(userId) {
       class="card"
     >
       <router-link :to="{ name: 'article-detail', params: { id: article.id } }">
-        <img :src="article.cover_url" :alt="article.title" loading="lazy" />
+        <img :src="resolveApiUrl(article.cover_url)" :alt="article.title" loading="lazy" />
         <div class="copy">
           <small>#{{ article.id }} · {{ article.company_name }}</small>
           <h3>{{ article.title }}</h3>

@@ -7,7 +7,7 @@ import InteractionPanel from '@/mobile/components/interaction/InteractionPanel.v
 import ImageLightbox from '@/components/ImageLightbox.vue'
 import { displayName, formatDate, initial } from '@/mobile/utils/format'
 import { recordBrowse } from '@/api/browse'
-import { getFileDownloadUrl } from '@/api/file'
+import { getFileDownloadUrl, resolveApiUrl } from '@/api/file'
 import { deleteTopic, getTopic } from '@/api/topic'
 import { getErrorMessage } from '@/constants/errorCodes'
 import { usePublicUserStore } from '@/stores/publicUser'
@@ -112,9 +112,9 @@ async function removeTopic() {
           v-for="image in topic.images"
           :key="image.file_id"
           type="button"
-          @click="previewSrc = image.url"
+          @click="previewSrc = resolveApiUrl(image.url)"
         >
-          <img :src="image.url" alt="" />
+          <img :src="resolveApiUrl(image.url)" alt="" />
         </button>
       </div>
       <div v-if="topic.attachment_file_ids.length" class="files">

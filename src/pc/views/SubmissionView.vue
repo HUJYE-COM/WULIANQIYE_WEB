@@ -115,7 +115,7 @@ async function selectArticle(article) {
 
 function handleCoverUploaded(file) {
   form.coverFileId = file.id
-  form.coverUrl = file.preview_url
+  form.coverUrl = resolveApiUrl(file.preview_url)
   errors.cover = ''
 }
 

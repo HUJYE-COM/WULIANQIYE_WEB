@@ -5,7 +5,7 @@ import { useRoute, useRouter } from 'vue-router'
 
 import InteractionPanel from '@/pc/components/interaction/InteractionPanel.vue'
 import { recordBrowse } from '@/api/browse'
-import { getFileDownloadUrl } from '@/api/file'
+import { getFileDownloadUrl, resolveApiUrl } from '@/api/file'
 import { deleteTopic, getTopic } from '@/api/topic'
 import { getErrorMessage } from '@/constants/errorCodes'
 import { usePublicUserStore } from '@/stores/publicUser'
@@ -145,7 +145,7 @@ function formatDate(value) {
           type="button"
           @click="activeImage = image"
         >
-          <img :src="image.url" alt="话题配图" loading="lazy" />
+          <img :src="resolveApiUrl(image.url)" alt="话题配图" loading="lazy" />
         </button>
       </section>
 
@@ -182,7 +182,7 @@ function formatDate(value) {
     </template>
 
     <div v-if="activeImage" class="lightbox" role="dialog" @click="activeImage = null">
-      <img :src="activeImage.url" alt="话题配图原图" />
+      <img :src="resolveApiUrl(activeImage.url)" alt="话题配图原图" />
       <button type="button" aria-label="关闭">×</button>
     </div>
   </article>

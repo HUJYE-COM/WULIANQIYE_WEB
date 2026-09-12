@@ -11,6 +11,7 @@ import {
   updateArticle,
   withdrawArticle,
 } from '@/api/article'
+import { resolveApiUrl } from '@/api/file'
 import { getErrorMessage } from '@/constants/errorCodes'
 import AttachmentUpload from '@/mobile/components/upload/AttachmentUpload.vue'
 import CoverUpload from '@/mobile/components/upload/CoverUpload.vue'
@@ -91,7 +92,7 @@ async function selectArticle(article) {
     form.companyTags = detail.company_tags.split(',').map((tag) => tag.trim()).filter(Boolean)
     form.content = detail.content
     form.coverFileId = detail.cover_file_id
-    form.coverUrl = detail.cover_url
+    form.coverUrl = resolveApiUrl(detail.cover_url)
     form.attachments = detail.attachments || []
     tab.value = 'write'
   } catch (error) {
@@ -103,7 +104,7 @@ async function selectArticle(article) {
 
 function handleCoverUploaded(file) {
   form.coverFileId = file.id
-  form.coverUrl = file.preview_url
+  form.coverUrl = resolveApiUrl(file.preview_url)
   errors.cover = ''
 }
 
@@ -150,7 +151,7 @@ async function save({ silent = false } = {}) {
       : await createArticle(payload)
     currentId.value = saved.id
     currentStatus.value = saved.status
-    form.coverUrl = saved.cover_url
+    form.coverUrl = resolveApiUrl(saved.cover_url)
     if (!silent) message.success(saved.status === 'published' ? '修改已保存' : '草稿已保存')
     await loadArticles()
     return saved
@@ -246,7 +247,7 @@ async function remove() {
         type="button"
         @click="selectArticle(article)"
       >
-        <img :src="article.cover_url" alt="" />
+        <img :src="resolveApiUrl(article.cover_url)" alt="" />
         <span>
           <b>{{ article.title }}</b>
           <small>{{ article.company_name }} · {{ article.status === 'published' ? '已发布' : '草稿' }}</small>

@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { useMessage } from 'naive-ui'
 
-import { getFilePreviewUrl, uploadFile } from '@/api/file'
+import { getFilePreviewUrl, resolveApiUrl, uploadFile } from '@/api/file'
 import { getErrorMessage } from '@/constants/errorCodes'
 import ImageLightbox from '@/components/ImageLightbox.vue'
 
@@ -51,7 +51,7 @@ async function selectFile(event) {
     <button
       class="cover"
       type="button"
-      @click="props.previewUrl ? (previewSrc = props.previewUrl) : input?.click()"
+      @click="props.previewUrl ? (previewSrc = resolveApiUrl(props.previewUrl)) : input?.click()"
     >
       <input
         ref="input"
@@ -59,7 +59,7 @@ async function selectFile(event) {
         type="file"
         @change="selectFile"
       />
-      <img v-if="previewUrl" :src="previewUrl" alt="封面预览" />
+      <img v-if="previewUrl" :src="resolveApiUrl(previewUrl)" alt="封面预览" />
       <span v-else class="placeholder">
         <b>＋</b>
         <strong>点按上传封面</strong>
