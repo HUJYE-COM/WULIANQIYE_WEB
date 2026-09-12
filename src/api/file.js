@@ -1,5 +1,17 @@
 import request from './request'
 
+const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL || '/api').replace(/\/+$/, '')
+
+export function resolveApiUrl(path) {
+  if (!path) return ''
+  if (/^https?:\/\//i.test(path)) return path
+  let rel = path.startsWith('/') ? path : `/${path}`
+  if (apiBaseUrl.endsWith('/api') && (rel === '/api' || rel.startsWith('/api/'))) {
+    rel = rel.slice(4)
+  }
+  return `${apiBaseUrl}${rel}`
+}
+
 export function uploadFile(file, onUploadProgress) {
   const form = new FormData()
   form.append('file', file)
@@ -10,9 +22,9 @@ export function uploadFile(file, onUploadProgress) {
 }
 
 export function getFilePreviewUrl(fileId) {
-  return `/api/file/${fileId}/preview`
+  return resolveApiUrl(`/file/${fileId}/preview`)
 }
 
 export function getFileDownloadUrl(fileId) {
-  return `/api/file/${fileId}`
+  return resolveApiUrl(`/file/${fileId}`)
 }

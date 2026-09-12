@@ -11,6 +11,7 @@ import {
   updateArticle,
   withdrawArticle,
 } from '@/api/article'
+import { resolveApiUrl } from '@/api/file'
 import { getErrorMessage } from '@/constants/errorCodes'
 import AttachmentUpload from '@/pc/components/submission/AttachmentUpload.vue'
 import CoverUpload from '@/pc/components/submission/CoverUpload.vue'
@@ -103,7 +104,7 @@ async function selectArticle(article) {
       .filter(Boolean)
     form.content = detail.content
     form.coverFileId = detail.cover_file_id
-    form.coverUrl = detail.cover_url
+    form.coverUrl = resolveApiUrl(detail.cover_url)
     form.attachments = detail.attachments || []
   } catch (error) {
     message.error(getErrorMessage(error))
@@ -181,7 +182,7 @@ async function save({ silent = false } = {}) {
       : await createArticle(payload)
     currentId.value = saved.id
     currentStatus.value = saved.status
-    form.coverUrl = saved.cover_url
+    form.coverUrl = resolveApiUrl(saved.cover_url)
     if (!silent) {
       message.success(saved.status === 'published' ? '修改已保存' : '草稿已保存')
     }
@@ -322,7 +323,7 @@ function updateCompanyTags(values) {
             type="button"
             @click="selectArticle(article)"
           >
-            <img :src="article.cover_url" alt="" />
+            <img :src="resolveApiUrl(article.cover_url)" alt="" />
             <span>
               <b>{{ article.title }}</b>
               <em>{{ article.company_name }}</em>
